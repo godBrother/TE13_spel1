@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace game
 {
@@ -16,6 +17,8 @@ namespace game
 		bool[] keys = new bool[4] { false, false, false, false };
 		double[] move = new double[2] { 0, 0 };
 		const int BallSize = 50;
+
+		List<Point> balls = new List<Point>();
 
         public Form1()
         {
@@ -127,7 +130,10 @@ namespace game
 		{
 			return Convert.ToInt32(var);
 		}
-
+		void spawnBall()
+		{
+			balls.Add(new Point(BallPos.X, BallPos.Y));
+		}
         void Form1_CreateBackBuffer(object sender, EventArgs e)
         {
             if (Backbuffer != null)
@@ -162,8 +168,6 @@ namespace game
 						);
 					Point[] points = { c1, c2, c3, c4 };
 					g.FillPolygon(Brushes.Black, points);
-					//g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, ToInt(Rot2Point(rot, "x")*50), ToInt(Rot2Point(rot, "y")*50)));
-					//g.DrawLine(new Pen(Brushes.Black), new Point(BallPos.X, BallPos.Y), new Point(BallPos.X+ToInt(Rot2Point(rot, "x") * 50), BallPos.Y+ToInt(Rot2Point(rot, "y") * 50)));
 					Font font = new Font("Verdana, sans serif", 16);
 					g.DrawString(Convert.ToString(rot*180/Math.PI), font, Brushes.Black, new Point(5, 5));
                 }
