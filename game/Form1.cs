@@ -120,7 +120,6 @@ namespace game
 			} else
 			{
 				ret = Math.Sin(r);
-
 			}
 			return ret;
 		}
@@ -144,11 +143,24 @@ namespace game
                 {
                     g.Clear(Color.White);
                     g.FillEllipse(Brushes.Black, BallPos.X - BallSize / 2, BallPos.Y - BallSize / 2, BallSize, BallSize);
+
 					double rot = Math.Atan2(MousePosition.Y-BallPos.Y, MousePosition.X-BallPos.X);
+
+					Point c1 = new Point(BallPos.X + ToInt(Rot2Point(rot - 90, "x") * 5), BallPos.X + ToInt(Rot2Point(rot - 90, "y") * 5));
+					Point c2 = new Point(
+						BallPos.X + ToInt(Rot2Point(rot, "x") * 50) + (c1.X - BallPos.X), 
+						BallPos.Y + ToInt(Rot2Point(rot, "y") * 50) + (c1.Y - BallPos.Y)
+						);
+					Point c4 = new Point(BallPos.X + ToInt(Rot2Point(rot + 90, "x") * 5), BallPos.X + ToInt(Rot2Point(rot + 90, "y") * 5));
+					Point c3 = new Point(
+						BallPos.X + ToInt(Rot2Point(rot, "x") * 50) + (c4.X - BallPos.X),
+						BallPos.Y + ToInt(Rot2Point(rot, "y") * 50) + (c4.Y - BallPos.Y)
+						);
+
 					g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, ToInt(Rot2Point(rot, "x")*50), ToInt(Rot2Point(rot, "y")*50)));
 					//g.DrawLine(new Pen(Brushes.Black), new Point(BallPos.X, BallPos.Y), new Point(BallPos.X+ToInt(Rot2Point(rot, "x") * 50), BallPos.Y+ToInt(Rot2Point(rot, "y") * 50)));
 					Font font = new Font("Verdana, sans serif", 16);
-					g.DrawString(Convert.ToString(rot*Math.PI*180), font, Brushes.Black, new Point(5, 5));
+					g.DrawString(Convert.ToString(rot*Math.PI), font, Brushes.Black, new Point(5, 5));
                 }
 
                 Invalidate();
