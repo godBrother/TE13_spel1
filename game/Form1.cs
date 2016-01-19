@@ -111,6 +111,23 @@ namespace game
                 e.Graphics.DrawImageUnscaled(Backbuffer, Point.Empty);
             }
         }
+		public double Rot2Point(double r, string type)
+		{
+			double ret = 0;
+			if(type == "x")
+			{
+				ret = Math.Cos(r);
+			} else
+			{
+				ret = Math.Sin(r);
+
+			}
+			return ret;
+		}
+		public int ToInt(double var)
+		{
+			return Convert.ToInt32(var);
+		}
 
         void Form1_CreateBackBuffer(object sender, EventArgs e)
         {
@@ -119,7 +136,6 @@ namespace game
 
             Backbuffer = new Bitmap(ClientSize.Width, ClientSize.Height);
         }
-
         void Draw()
         {
             if (Backbuffer != null)
@@ -128,8 +144,11 @@ namespace game
                 {
                     g.Clear(Color.White);
                     g.FillEllipse(Brushes.Black, BallPos.X - BallSize / 2, BallPos.Y - BallSize / 2, BallSize, BallSize);
-					//double rot = Math.Atan2(BallPos.X-MousePosition.X, BallPos.Y-MousePosition.Y);
-					g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, 10, 50));
+					double rot = Math.Atan2(MousePosition.Y-BallPos.Y, MousePosition.X-BallPos.X);
+					g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, ToInt(Rot2Point(rot, "x")*50), ToInt(Rot2Point(rot, "y")*50)));
+					//g.DrawLine(new Pen(Brushes.Black), new Point(BallPos.X, BallPos.Y), new Point(BallPos.X+ToInt(Rot2Point(rot, "x") * 50), BallPos.Y+ToInt(Rot2Point(rot, "y") * 50)));
+					Font font = new Font("Verdana, sans serif", 16);
+					g.DrawString(Convert.ToString(rot*Math.PI*180), font, Brushes.Black, new Point(5, 5));
                 }
 
                 Invalidate();
