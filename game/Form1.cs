@@ -156,11 +156,12 @@ namespace game
 						BallPos.X + ToInt(Rot2Point(rot, "x") * 50) + (c4.X - BallPos.X),
 						BallPos.Y + ToInt(Rot2Point(rot, "y") * 50) + (c4.Y - BallPos.Y)
 						);
-
-					g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, ToInt(Rot2Point(rot, "x")*50), ToInt(Rot2Point(rot, "y")*50)));
+					Point[] points = { c1, c2, c3, c4 };
+					g.DrawPolygon(new Pen(Brushes.Black), points);
+					//g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, ToInt(Rot2Point(rot, "x")*50), ToInt(Rot2Point(rot, "y")*50)));
 					//g.DrawLine(new Pen(Brushes.Black), new Point(BallPos.X, BallPos.Y), new Point(BallPos.X+ToInt(Rot2Point(rot, "x") * 50), BallPos.Y+ToInt(Rot2Point(rot, "y") * 50)));
 					Font font = new Font("Verdana, sans serif", 16);
-					g.DrawString(Convert.ToString(rot*Math.PI), font, Brushes.Black, new Point(5, 5));
+					g.DrawString(Convert.ToString(rot*180/Math.PI), font, Brushes.Black, new Point(5, 5));
                 }
 
                 Invalidate();
