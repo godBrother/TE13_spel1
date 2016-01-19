@@ -146,18 +146,22 @@ namespace game
 
 					double rot = Math.Atan2(MousePosition.Y-BallPos.Y, MousePosition.X-BallPos.X);
 
-					Point c1 = new Point(BallPos.X + ToInt(Rot2Point(rot - 90, "x") * 5), BallPos.X + ToInt(Rot2Point(rot - 90, "y") * 5));
+					Point c1 = new Point(
+						BallPos.X + ToInt(Rot2Point(rot - 90, "x") * 5), 
+						BallPos.Y + ToInt(Rot2Point(rot - 90, "y") * 5));
 					Point c2 = new Point(
 						BallPos.X + ToInt(Rot2Point(rot, "x") * 50) + (c1.X - BallPos.X), 
 						BallPos.Y + ToInt(Rot2Point(rot, "y") * 50) + (c1.Y - BallPos.Y)
 						);
-					Point c4 = new Point(BallPos.X + ToInt(Rot2Point(rot + 90, "x") * 5), BallPos.X + ToInt(Rot2Point(rot + 90, "y") * 5));
+					Point c4 = new Point(
+						BallPos.X + ToInt(Rot2Point(rot + 90, "x") * 5), 
+						BallPos.Y + ToInt(Rot2Point(rot + 90, "y") * 5));
 					Point c3 = new Point(
 						BallPos.X + ToInt(Rot2Point(rot, "x") * 50) + (c4.X - BallPos.X),
 						BallPos.Y + ToInt(Rot2Point(rot, "y") * 50) + (c4.Y - BallPos.Y)
 						);
 					Point[] points = { c1, c2, c3, c4 };
-					g.DrawPolygon(new Pen(Brushes.Black), points);
+					g.FillPolygon(Brushes.Black, points);
 					//g.FillRectangle(Brushes.Black, new Rectangle(BallPos.X, BallPos.Y, ToInt(Rot2Point(rot, "x")*50), ToInt(Rot2Point(rot, "y")*50)));
 					//g.DrawLine(new Pen(Brushes.Black), new Point(BallPos.X, BallPos.Y), new Point(BallPos.X+ToInt(Rot2Point(rot, "x") * 50), BallPos.Y+ToInt(Rot2Point(rot, "y") * 50)));
 					Font font = new Font("Verdana, sans serif", 16);
