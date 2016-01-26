@@ -18,7 +18,7 @@ namespace game
 		double[] move = new double[2] { 0, 0 };
 		const int BallSize = 50;
 
-		List<Point> balls = new List<Point>();
+		List<Point> Balls = new List<Point>();
 
         public Form1()
         {
@@ -46,27 +46,27 @@ namespace game
 
 		void tick_keys(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Left)
+			if (e.KeyCode == Keys.A)
 				keys[0] = true;
-			if (e.KeyCode == Keys.Right)
+			if (e.KeyCode == Keys.D)
 				keys[1] = true;
-			if (e.KeyCode == Keys.Up)
+			if (e.KeyCode == Keys.W)
 				keys[2] = true;
-			if (e.KeyCode == Keys.Down)
+			if (e.KeyCode == Keys.S)
 				keys[3] = true;
 			if (e.KeyCode == Keys.Escape)
-				System.Windows.Forms.Application.Exit();
+				Application.Exit();
 		}
 
 		void tick_keysUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Left)
+			if (e.KeyCode == Keys.A)
 				keys[0] = false;
-			if (e.KeyCode == Keys.Right)
+			if (e.KeyCode == Keys.D)
 				keys[1] = false;
-			if (e.KeyCode == Keys.Up)
+			if (e.KeyCode == Keys.W)
 				keys[2] = false;
-			if (e.KeyCode == Keys.Down)
+			if (e.KeyCode == Keys.S)
 				keys[3] = false;
 		}
 
@@ -130,9 +130,9 @@ namespace game
 		{
 			return Convert.ToInt32(var);
 		}
-		void spawnBall()
+		void SpawnBall(int x, int y)
 		{
-			balls.Add(new Point(BallPos.X, BallPos.Y));
+			Balls.Add(new Point(BallPos.X+x, BallPos.Y+y));
 		}
         void Form1_CreateBackBuffer(object sender, EventArgs e)
         {
@@ -149,6 +149,10 @@ namespace game
                 {
                     g.Clear(Color.White);
                     g.FillEllipse(Brushes.Black, BallPos.X - BallSize / 2, BallPos.Y - BallSize / 2, BallSize, BallSize);
+					foreach(var c in Balls)
+					{
+						g.FillEllipse(Brushes.Black, c.X, c.Y, 10, 10);
+					}
 
 					double rot = Math.Atan2(MousePosition.Y-BallPos.Y, MousePosition.X-BallPos.X);
 
