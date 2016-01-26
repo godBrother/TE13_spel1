@@ -40,10 +40,16 @@ namespace game
 
 			this.KeyDown += new KeyEventHandler(tick_keys);
 			this.KeyUp += new KeyEventHandler(tick_keysUp);
+			this.MouseDown += new MouseEventHandler(clickFunc);
+
 			FormBorderStyle = FormBorderStyle.None;
 			WindowState = FormWindowState.Maximized;
         }
-
+		void clickFunc(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+				SpawnBall(0, 0);
+		}
 		void tick_keys(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.A)
@@ -56,6 +62,8 @@ namespace game
 				keys[3] = true;
 			if (e.KeyCode == Keys.Escape)
 				Application.Exit();
+			if (e.KeyCode == Keys.Space)
+				SpawnBall(0, 0);
 		}
 
 		void tick_keysUp(object sender, KeyEventArgs e)
